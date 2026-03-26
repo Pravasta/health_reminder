@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 enum Environment { development, production, staging, testing }
 
 extension EnvironmentExtension on Environment {
@@ -17,26 +19,26 @@ extension EnvironmentExtension on Environment {
   String get schema {
     switch (this) {
       case Environment.development:
-        return 'http';
+        return dotenv.env['API_SCHEME_DEV'].toString();
       case Environment.production:
-        return 'http';
+        return dotenv.env['API_SCHEME_PROD'].toString();
       case Environment.staging:
-        return 'https';
+        return dotenv.env['API_SCHEME_STAGING'].toString();
       case Environment.testing:
-        return 'https';
+        return dotenv.env['API_SCHEME_TESTING'].toString();
     }
   }
 
   String get baseURL {
     switch (this) {
       case Environment.development:
-        return '192.168.0.107';
+        return dotenv.env['API_BASE_URL_DEV'].toString();
       case Environment.production:
-        return '103.175.220.73';
+        return dotenv.env['API_BASE_URL_PROD'].toString();
       case Environment.staging:
-        return 'https://staging.com';
+        return dotenv.env['API_BASE_URL_STAGING'].toString();
       case Environment.testing:
-        return 'https://testing.com';
+        return dotenv.env['API_BASE_URL_TESTING'].toString();
     }
   }
 

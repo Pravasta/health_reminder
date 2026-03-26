@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:health_care_reminder/presentation/bloc/infusion/infusion_bloc.dart';
 import 'package:health_care_reminder/presentation/pages/home/home_page.dart';
 
@@ -13,7 +14,13 @@ import 'presentation/bloc/infusion_by_patient/infusion_by_patient_bloc.dart';
 import 'presentation/bloc/infusion_history/infusion_history_bloc.dart';
 import 'presentation/bloc/patient_new/patient_bloc.dart';
 
-const Environment appEnvironment = Environment.production;
+Environment get appEnvironment {
+  final envString = dotenv.env['APP_ENV'] ?? 'development';
+  return Environment.values.firstWhere(
+    (e) => e.value == envString,
+    orElse: () => Environment.development,
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.deviceId});

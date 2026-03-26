@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:health_care_reminder/core/database/database.dart';
 import 'package:health_care_reminder/core/endpoint/app_endpoint.dart';
 import 'package:health_care_reminder/core/services/web_socket_service.dart';
@@ -11,6 +12,8 @@ GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
 
   // =========================
   // INIT DATABASE
